@@ -157,6 +157,19 @@
     color:var(--machine); font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.05em;
   }
   footer a{ color:var(--machine); }
+  .portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.oracle-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
 
   @media (max-width:520px){
     section{ padding:3.4rem 1.2rem; }
@@ -185,8 +198,13 @@
   <!-- PORTRAIT -->
   <section class="portrait-wrap" aria-label="The Oracle">
     <div class="portrait" role="img" aria-label="Portrait of the Oracle — to be added">
-      <span class="big">The Oracle</span>
-      <span class="mono">[ portrait to follow ]</span>
+      <div class="portrait">
+  <img
+    src="booth_image.png"
+    alt="The Oracle – robotic fortune teller"
+    class="oracle-image"
+  >
+</div>
     </div>
     <p class="caption">The teller wears a robe, and a mask, and under the mask a machine.</p>
   </section>
