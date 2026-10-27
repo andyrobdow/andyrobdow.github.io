@@ -1,71 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/gravatar.png">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You Are Not You — The Oracle · BritCHI 2026</title>
+<meta name="description" content="The Oracle is a performance installation at BritCHI 2026 in which an AI forecasts your future. A project on authorship psychosis: the words and thinking we hand to machines, then adopt as our own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#1a1026;
+    --ground-2:#241634;
+    --veil:#120a1c;
+    --gold:#c8a23c;
+    --gold-bright:#e6c766;
+    --ink:#efe6d2;
+    --ink-soft:#c7b9d6;
+    --machine:#7f7f88;
+    --edge:rgba(200,162,60,.34);
+    --measure:40rem;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(130% 70% at 50% -5%, var(--ground-2) 0%, var(--ground) 40%, var(--veil) 100%) fixed;
+    font-family:"Cormorant", Georgia, "Times New Roman", serif;
+    font-size:21px; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* drifting stars */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(1.4px 1.4px at 18% 22%, rgba(230,199,102,.5), transparent 60%),
+      radial-gradient(1.2px 1.2px at 72% 14%, rgba(230,199,102,.33), transparent 60%),
+      radial-gradient(1.5px 1.5px at 42% 62%, rgba(230,199,102,.4), transparent 60%),
+      radial-gradient(1.1px 1.1px at 86% 54%, rgba(230,199,102,.3), transparent 60%),
+      radial-gradient(1.3px 1.3px at 9% 78%, rgba(230,199,102,.33), transparent 60%),
+      radial-gradient(1.2px 1.2px at 58% 88%, rgba(230,199,102,.3), transparent 60%),
+      radial-gradient(1.2px 1.2px at 33% 40%, rgba(230,199,102,.28), transparent 60%);
+    opacity:.6; animation:drift 70s linear infinite alternate;
+  }
+  @keyframes drift{from{transform:translateY(0);}to{transform:translateY(-22px);}}
+  @media (prefers-reduced-motion:reduce){body::before{animation:none;}}
 
-    <title>andydow.com</title>
+  main{position:relative; z-index:1;}
+  section{
+    max-width:var(--measure);
+    margin:0 auto; padding:4.5rem 1.4rem;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:.74rem; letter-spacing:.2em; color:var(--machine);
+    text-transform:lowercase; margin:0 0 1rem;
+  }
 
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/andydow.css" rel="stylesheet">
-	<link href="index.css" rel="stylesheet">
+  /* HERO */
+  .hero{ text-align:center; padding-top:5.5rem; padding-bottom:3rem; }
+  .orb{
+    width:132px; height:132px; margin:0 auto 1.8rem; border-radius:50%;
+    background:
+      radial-gradient(40% 35% at 38% 32%, rgba(255,255,255,.55), transparent 60%),
+      radial-gradient(90% 90% at 50% 50%, rgba(230,199,102,.22), rgba(26,16,38,.1) 70%),
+      radial-gradient(120% 120% at 50% 120%, rgba(120,70,160,.5), transparent 70%);
+    box-shadow:0 0 54px rgba(200,162,60,.25), inset 0 0 44px rgba(120,70,160,.4);
+    border:1px solid var(--edge);
+    animation:breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{box-shadow:0 0 54px rgba(200,162,60,.22), inset 0 0 44px rgba(120,70,160,.4);}50%{box-shadow:0 0 72px rgba(200,162,60,.34), inset 0 0 44px rgba(120,70,160,.5);}}
+  @media (prefers-reduced-motion:reduce){.orb{animation:none;}}
+  h1{
+    font-weight:500; font-size:clamp(2.8rem,9vw,4.6rem); line-height:1;
+    margin:.2rem 0 1.2rem; letter-spacing:.005em;
+  }
+  h1 em{ display:block; font-size:.42em; font-style:italic; font-weight:400;
+    color:var(--gold-bright); letter-spacing:.04em; margin-top:.7rem;}
+  .hero p{ max-width:32rem; margin:0 auto; color:var(--ink-soft); font-size:1.28rem; }
+  .hero p .glint{ color:var(--ink); }
 
-  </head>
-	 
-  <body>
+  /* PORTRAIT placeholder */
+  .portrait-wrap{ text-align:center; padding-top:1rem; }
+  .portrait{
+    width:100%; max-width:30rem; aspect-ratio:4/5; margin:0 auto;
+    border:1px solid var(--edge); border-radius:6px;
+    background:
+      repeating-linear-gradient(45deg, rgba(200,162,60,.04) 0 14px, transparent 14px 28px),
+      linear-gradient(180deg, rgba(36,22,52,.7), rgba(18,10,28,.7));
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    color:var(--machine); gap:.6rem;
+    box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 0 0 4px rgba(200,162,60,.07);
+  }
+  .portrait .mono{ font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.12em; }
+  .portrait .big{ font-size:2.4rem; font-style:italic; color:var(--ink-soft); }
+  .caption{ margin:1rem auto 0; color:var(--machine); font-style:italic; font-size:1rem; max-width:28rem;}
 
-    <div class="site-wrapper">
+  /* WALL */
+  .wall-head{ text-align:center; }
+  .wall-head h2{ font-weight:500; font-size:clamp(2.2rem,6vw,3rem); margin:.3rem 0 .4rem; }
+  .wall-head .count{ font-family:"IBM Plex Mono",monospace; color:var(--gold-bright); font-size:1rem; }
+  .wall-list{ list-style:none; margin:2rem 0 0; padding:0; display:flex; flex-direction:column; gap:.8rem; }
+  .wall-list li{
+    padding:1rem 1.1rem; font-style:italic; font-size:1.08rem; color:var(--ink-soft);
+    background:rgba(18,10,28,.5); border:1px solid rgba(200,162,60,.15); border-radius:5px;
+    opacity:0; transform:translateY(8px); animation:settle .6s ease forwards;
+  }
+  @keyframes settle{to{opacity:1; transform:none;}}
+  @media (prefers-reduced-motion:reduce){.wall-list li{opacity:1; transform:none; animation:none;}}
+  .wall-note{ text-align:center; margin-top:1.6rem; color:var(--machine); font-family:"IBM Plex Mono",monospace; font-size:.76rem; letter-spacing:.04em;}
 
-      <div class="site-wrapper-inner">
+  /* divider */
+  .rule{ width:100%; max-width:var(--measure); margin:0 auto; border:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--edge), transparent); }
 
-        <div class="cover-container">
+  /* ESSAY */
+  .essay h2{ font-weight:500; font-size:clamp(2rem,5.5vw,2.7rem); margin:.3rem 0 1.1rem; }
+  .essay p{ margin:0 0 1.1rem; }
+  .essay .lead{ font-size:1.18rem; }
+  .essay .term{ color:var(--gold-bright); font-style:italic; }
 
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">andydow.com</h3>
-              <ul class="nav masthead-nav">
-                <li class="active"><a href="index.html">Home</a></li>
-				<li><a href="codemaking/codemaking.html">Codemaking</a></li>
-                <li><a href="filmmaking/filmmaking.html">Filmmaking</a></li>
-                <li><a href="CV/Andy_Dow_CV.pdf">CV</a></li>
-              </ul>
-            </div>
-          </div>
+  .paper{
+    margin-top:2rem; padding:1.4rem 1.4rem;
+    border:1px solid var(--edge); border-radius:6px;
+    background:linear-gradient(180deg, rgba(36,22,52,.6), rgba(18,10,28,.5));
+    display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.4rem;
+  }
+  .paper .meta{ flex:1 1 16rem; }
+  .paper .meta .k{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.14em; color:var(--machine); display:block; margin-bottom:.35rem;}
+  .paper .meta .t{ font-size:1.25rem; font-style:italic; color:var(--ink); line-height:1.3; }
+  .paper a.cta{
+    flex:0 0 auto; text-decoration:none; color:var(--veil); font-weight:600;
+    font-size:1.05rem; padding:.7rem 1.3rem; border-radius:10px;
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+    box-shadow:0 6px 22px rgba(200,162,60,.28);
+  }
+  .paper a.cta:focus-visible{ outline:3px solid var(--gold-bright); outline-offset:3px; }
 
-          <div class="inner-cover">
-            <h1 class="cover-heading">Listen,</h1>
-            <p class="lead">Andy Dow was a onetime freelance videographer, now turned <a target="_blank" href="http://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction" rel="nofollow" style="color:#389FF9">HCI</a> researcher. Herein can be found samples of his effusions both fiction and non-fiction, practical and use-less. Thanks for stopping by.</p>
-            <p class="lead">
-              <a href="mailto:andyrobdow@gmail.com" class="btn btn-lg btn-link">Contact</a>
-            </p>
-          </div>
+  /* FINALE */
+  .finale{ text-align:center; padding:5rem 1.4rem 4rem; }
+  .finale .line{
+    font-size:clamp(2rem,6.5vw,3.4rem); line-height:1.18; font-weight:500;
+    max-width:24rem; margin:0 auto;
+  }
+  .finale .line .turn{ font-style:italic; color:var(--gold-bright); display:block; margin-top:.4rem;}
+  .finale .prov{
+    margin:2.4rem auto 0; max-width:30rem; color:var(--machine);
+    font-size:1rem; font-style:italic; line-height:1.5;
+  }
+  .finale .prov .mono{ font-family:"IBM Plex Mono",monospace; font-style:normal; font-size:.8em; letter-spacing:.04em;}
 
-          <div class="mastfoot">
-            <div class="inner">
-				<a target="_blank" href="http://vimeo.com/user2922632" rel="nofollow"><img src="assets/ico/vimeo.png"></a>
-				<a target="_blank" href="http://uk.linkedin.com/pub/andrew-dow/8b/20b/b7b/" rel="nofollow"><img src="assets/ico/linkedin.png"></a>
-				<a target="_blank" href="http://www.facebook.com/andy.dow.14" rel="nofollow"><img src="assets/ico/facebook.png"></a>
-				<a target="_blank" href="https://twitter.com/ApocalypseDow" rel="nofollow"><img src="assets/ico/twitter.png"></a>
-				<a target="_blank" href="http://flimster.blogspot.co.uk" rel="nofollow"><img src="assets/ico/blogger.png"></a>
-				
-				
-            </div>
-          </div>
+  footer{
+    position:relative; z-index:1; text-align:center; padding:2.4rem 1.4rem 3rem;
+    color:var(--machine); font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.05em;
+  }
+  footer a{ color:var(--machine); }
 
-        </div>
+  @media (max-width:520px){
+    section{ padding:3.4rem 1.2rem; }
+    .paper{ flex-direction:column; align-items:stretch; text-align:center; }
+    .paper a.cta{ width:100%; text-align:center; }
+  }
+</style>
+</head>
+<body>
+<main>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb" aria-hidden="true"></div>
+    <p class="eyebrow">the oracle has spoken</p>
+    <h1>You are not you<em>a performance on who is doing your thinking</em></h1>
+    <p>
+      <span class="glint">The Oracle</span> is a performance installation at
+      <span class="glint">BritCHI 2026</span>. Sit, and your future is forecast —
+      calmer, healthier, a move somewhere greener — and quietly generated by an AI.
+      Each future it tells is added to the wall: a growing list of bland, mundane,
+      ultimately identical somethings we take up in place of our own thinking.
+    </p>
+  </section>
+
+  <!-- PORTRAIT -->
+  <section class="portrait-wrap" aria-label="The Oracle">
+    <div class="portrait" role="img" aria-label="Portrait of the Oracle — to be added">
+      <span class="big">The Oracle</span>
+      <span class="mono">[ portrait to follow ]</span>
+    </div>
+    <p class="caption">The teller wears a robe, and a mask, and under the mask a machine.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- THE WALL -->
+  <section>
+    <div class="wall-head">
+      <p class="eyebrow">the wall of futures</p>
+      <h2>What the Oracle has promised</h2>
+      <div class="count" id="wallCount">a hundred futures, and counting</div>
+    </div>
+    <ul class="wall-list" id="wallList"></ul>
+    <p class="wall-note">read them again. notice how little they differ.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- AUTHORSHIP PSYCHOSIS -->
+  <section class="essay">
+    <p class="eyebrow">what it's really about</p>
+    <h2>Authorship psychosis</h2>
+    <p class="lead">
+      The Oracle is a parlour trick with a point. We increasingly hand our words and
+      our thinking to a machine — our emails, our plans, our hopes — and then take
+      back what it gives us as if we had thought it ourselves.
+    </p>
+    <p>
+      We call this <span class="term">authorship psychosis</span>: the loosening of
+      the boundary between the thoughts you have authored and the fluent output you
+      merely prompted. It borrows from the old paradox of the ghost-writer, whose
+      clients come, in good faith, to believe they thought the words themselves.
+      Generative AI generalises that paradox and removes its friction. The more we
+      delegate, the less the self is practised — and the harder it becomes to tell
+      your own voice from the one written for you.
+    </p>
+    <p>
+      The futures on the wall are the demonstration. Ask a machine what your life
+      should look like and it will answer, warmly and plausibly, with the same life
+      it offers everyone else. Adopt it, and your future quietly regresses to the mean.
+    </p>
+
+    <div class="paper">
+      <div class="meta">
+        <span class="k">the paper · britchi 2026</span>
+        <span class="t">Mollified by Mundane Machines:<br>GenAI and the Rise of Authorship Psychosis</span>
       </div>
-	 </div>
+      <a class="cta" href="#" id="paperLink" rel="noopener">Read the paper</a>
+    </div>
+  </section>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/docs.min.js"></script>
-  </body>
+  <hr class="rule">
+
+  <!-- FINALE -->
+  <section class="finale">
+    <p class="line">
+      The more we adopt the thinking of the machine,
+      <span class="turn">the more you are not you. You're me.</span>
+    </p>
+    <p class="prov">
+      The line is spoken by <span style="font-style:normal;color:var(--ink-soft)">Hauser</span>
+      in <span style="font-style:normal;color:var(--ink-soft)">Total Recall</span> (1990) —
+      a man confronted by the self he used to be, writing over the self he has become.
+      <br><span class="mono">you are not you, you're me.</span>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  youarenotyou.com · The Oracle — a performance on authorship psychosis · BritCHI 2026<br>
+  nothing you tell the Oracle is kept. &nbsp;·&nbsp; <a href="#" id="footPaper">the paper</a>
+</footer>
+
+<script src="../fortunes.js"></script>
+<script>
+/* Pull a handful of real pre-generated fortunes at random for the example wall.
+   Falls back gracefully if the bank isn't loaded. */
+(function(){
+  const bank = (window.FORTUNE_BANK || []);
+  const list = document.getElementById('wallList');
+  const N = 6;
+
+  function sample(arr, n){
+    const copy = arr.slice();
+    const out = [];
+    while(copy.length && out.length < n){
+      const i = Math.floor(Math.random()*copy.length);
+      out.push(copy.splice(i,1)[0]);
+    }
+    return out;
+  }
+  // Trim the mystic preamble so the convergence of content is scannable,
+  // the same way the booth wall does.
+  function excerpt(f){
+    const stripped = f.replace(/^[^.]*\.\s*/, '').trim();
+    return '“' + (stripped.length > 180 ? stripped.slice(0,180).trim()+'…' : stripped) + '”';
+  }
+
+  const picks = bank.length ? sample(bank, N) : [
+    "Within five years you will slow down, care for your health, and move somewhere greener.",
+    "You will reconnect with family and find work that finally means something.",
+    "A calmer life is coming; you will let go of what no longer serves you."
+  ];
+
+  picks.forEach((f, idx)=>{
+    const li = document.createElement('li');
+    li.textContent = bank.length ? excerpt(f) : '“'+f+'”';
+    li.style.animationDelay = (idx*0.09)+'s';
+    list.appendChild(li);
+  });
+})();
+
+/* Placeholder paper links — swap href when the paper is online. */
+(function(){
+  const PAPER_URL = "#"; // TODO: replace with the published paper URL
+  document.getElementById('paperLink').setAttribute('href', PAPER_URL);
+  document.getElementById('footPaper').setAttribute('href', PAPER_URL);
+})();
+</script>
+</body>
 </html>
